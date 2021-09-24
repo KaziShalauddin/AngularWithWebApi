@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using WebApi.Models.DbModels;
 
@@ -151,5 +152,24 @@ namespace WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, dt);
         }
 
+        [Route("api/Employee/SaveFile")]
+        public string SaveFile()
+        {
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+                var postedFile = httpRequest.Files[0];
+                string fileName = postedFile.FileName;
+                var physicalPath = HttpContext.Current.Server.MapPath("~/Photos/" + fileName);
+
+                postedFile.SaveAs(physicalPath);
+
+                return fileName;
+            }
+            catch (Exception)
+            {
+                return "NoPhoto.png";
+            }
+        }
     }
 }
