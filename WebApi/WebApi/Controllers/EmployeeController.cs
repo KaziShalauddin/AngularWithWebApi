@@ -11,37 +11,43 @@ using WebApi.Models.DbModels;
 
 namespace WebApi.Controllers
 {
-    public class DepartmentController : ApiController
+    public class EmployeeController : ApiController
     {
         public HttpResponseMessage Get()
         {
             string query = @"
-                            select DepartmentId, DepartmentName from
-                            dbo.Departments
+                            select EmployeeId, EmployeeName, DepartmentId,
+                            convert(varchar(10), JoiningDate, 120) as JoiningDate,
+                            PhotoPath
+                            from dbo.Employees
                             ";
             DataTable dt = new DataTable();
-            using( var connection = new SqlConnection(
+            using (var connection = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString))
 
-                using(var cmd = new SqlCommand(query, connection))
+            using (var cmd = new SqlCommand(query, connection))
 
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(dt);
-                }
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                cmd.CommandType = CommandType.Text;
+                da.Fill(dt);
+            }
 
             return Request.CreateResponse(HttpStatusCode.OK, dt);
         }
 
-        public string Post(Department department)
+        public string Post(Employee employee)
         {
             try
             {
                 string query = @"
-                            insert into dbo.Departments 
-                            values ('"+department.DepartmentName+ @"')
-                            ";
+                            insert into dbo.Employees values 
+                            (
+                            '" + employee.EmployeeName + @"'
+                            ,'" + employee.DepartmentId + @"'
+                            ,'" + employee.JoiningDate + @"'
+                            ,'" + employee.PhotoPath + @"'
+                            )";
                 DataTable dt = new DataTable();
                 using (var connection = new SqlConnection(
                     ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString))
@@ -58,18 +64,21 @@ namespace WebApi.Controllers
             }
             catch (Exception)
             {
-                return "Failed to add!!"; 
+                return "Failed to add!!";
             }
         }
 
-        public string Put(Department department)
+        public string Put(Employee employee)
         {
             try
             {
                 string query = @"
-                            update dbo.Departments set DepartmentName = 
-                            '" + department.DepartmentName + @"'
-                             where DepartmentId = '" + department.DepartmentId + @"'
+                            update dbo.Employees set 
+                            EmployeeName = '" + employee.EmployeeName + @"'
+                            ,DepartmentId = '" + employee.DepartmentId + @"'
+                            ,JoiningDate = '" + employee.JoiningDate + @"'
+                            ,PhotoPath = '" + employee.PhotoPath + @"'
+                             where EmployeeId = '" + employee.EmployeeId + @"'
                             ";
                 DataTable dt = new DataTable();
                 using (var connection = new SqlConnection(
@@ -85,19 +94,19 @@ namespace WebApi.Controllers
 
                 return "Updated Successfully!";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "Failed to Update!!";
             }
         }
-        
+
         public string Delete(int id)
         {
             try
             {
                 string query = @"
-                            delete from dbo.Departments 
-                            where DepartmentId = '" + id + @"'
+                            delete from dbo.Employees 
+                            where EmployeeId = '" + id + @"'
                             ";
                 DataTable dt = new DataTable();
                 using (var connection = new SqlConnection(
@@ -118,5 +127,29 @@ namespace WebApi.Controllers
                 return "Failed to delete!!";
             }
         }
+
+        [Route("api/Employee/GetAllDepartments")]
+        [HttpGet]
+        public HttpResponseMessage GetAllDepartments()
+        {
+            string query = @"
+                            select DepartmentId, DepartmentName from
+                            dbo.Departments
+                            ";
+            DataTable dt = new DataTable();
+            using (var connection = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString))
+
+            using (var cmd = new SqlCommand(query, connection))
+
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                cmd.CommandType = CommandType.Text;
+                da.Fill(dt);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, dt);
+        }
+
     }
 }
