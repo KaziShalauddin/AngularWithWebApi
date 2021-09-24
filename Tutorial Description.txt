@@ -1,0 +1,4 @@
+
+Time  ---------------- Topic
+---------------------------------
+48:00  --------------- Angular project architecture explanation
