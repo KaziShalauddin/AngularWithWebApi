@@ -34,3 +34,18 @@ code .
 Run project
 -----------------------------
 ng serve --open
+
+-----------------------------
+Generate new component
+-----------------------------
+ng generate component department
+
+-----------------------------
+Generate new sub component
+-----------------------------
+ng generate component department/add-edit_department
+
+-----------------------------
+Generate new service
+-----------------------------
+ng generate service shared
