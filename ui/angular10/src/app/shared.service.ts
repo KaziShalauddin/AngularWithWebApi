@@ -6,49 +6,49 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedService {
-readonly APIUrl= "http://localhost:51846/api";
-readonly PhotoUrl= "http://localhost:51846/photos";
-  
-constructor(private http:HttpClient) { }
+  readonly APIUrl= "http://localhost:51846/api";
+  readonly PhotoUrl= "http://localhost:51846/photos";
+    
+  constructor(private http:HttpClient) { }
 
-getDepartmentList():Observable<any[]>{
-  return this.http.get<any>(this.APIUrl + '/department');
-}
+  getDepartmentList():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl + '/Department');
+  }
 
-addDepartment(val:any){
-  return this.http.post(this.APIUrl + '/Department',val);
-}
+  addDepartment(val:any){
+    return this.http.post(this.APIUrl + '/Department',val);
+  }
 
-updateDepartment(val:any){
-  return this.http.put(this.APIUrl + '/Department',val);
-}
+  updateDepartment(val:any){
+    return this.http.put(this.APIUrl + '/Department',val);
+  }
 
-deleteDepartment(val:any){
-  return this.http.delete(this.APIUrl + '/Department',val);
-}
+  deleteDepartment(val:any){
+    return this.http.delete(this.APIUrl + '/Department',val);
+  }
 
-getEmployeeList():Observable<any[]>{
-  return this.http.get<any>(this.APIUrl + '/Employee');
-}
+  getEmployeeList():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl + '/Employee');
+  }
 
-addEmployee(val:any){
-  return this.http.post(this.APIUrl + '/Employee',val);
-}
+  addEmployee(val:any){
+    return this.http.post(this.APIUrl + '/Employee',val);
+  }
 
-updateEmployee(val:any){
-  return this.http.put (this.APIUrl + '/Employee',val);
-}
+  updateEmployee(val:any){
+    return this.http.put (this.APIUrl + '/Employee',val);
+  }
 
-deleteEmployee(val:any){
-  return this.http.delete(this.APIUrl + '/Employee',val);
-}
+  deleteEmployee(val:any){
+    return this.http.delete(this.APIUrl + '/Employee',val);
+  }
 
-uploadPhoto(val:any){
-  return this.http.post(this.APIUrl + '/Employee/SaveFile',val);
-}
+  uploadPhoto(val:any){
+    return this.http.post(this.APIUrl + '/Employee/SaveFile',val);
+  }
 
-getAllDepartments():Observable<any[]>{
-  return this.http.get<any[]>(this.APIUrl + '/Employee/GetAllDepartments');
-}
+  getAllDepartments():Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + '/Employee/GetAllDepartments');
+  }
 
 }
