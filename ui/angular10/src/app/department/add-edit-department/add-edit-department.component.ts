@@ -21,8 +21,8 @@ export class AddEditDepartmentComponent implements OnInit {
 
     addDepartment() {
         var val = {
-            DepartmentId : this.dep.DepartmentId,
-            DepartmentName: this.dep.DepartmentName
+            DepartmentId : this.DepartmentId,
+            DepartmentName: this.DepartmentName
         }
         this.service.addDepartment(val).subscribe(res => {
           alert(res.toString());
@@ -31,8 +31,8 @@ export class AddEditDepartmentComponent implements OnInit {
 
     updateDepartment() {
       var val = {
-        DepartmentId: this.dep.DepartmentId,
-        DepartmentName: this.dep.DepartmentName
+        DepartmentId: this.DepartmentId,
+        DepartmentName: this.DepartmentName
       }
         this.service.updateDepartment(val).subscribe(res => {
         alert(res.toString());
