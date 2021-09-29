@@ -63,7 +63,7 @@ namespace WebApi.Controllers
 
                 return "Added Successfully!";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "Failed to add!!";
             }
