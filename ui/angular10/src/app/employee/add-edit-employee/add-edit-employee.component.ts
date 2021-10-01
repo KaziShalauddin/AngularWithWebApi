@@ -51,5 +51,16 @@ export class AddEditEmployeeComponent implements OnInit {
 
     loadAllDepartmentList() {
         this.service.getAllDepartments().subscribe(data => { this.DepartmentsList = data });
-  }
+    }
+
+    uploadPhoto(event) {
+        var file = event.target.files[0];
+        const formData: FormData = new FormData();
+        formData.append('EmployeePhoto', file, file.Name);
+
+        this.service.uploadPhoto(formData).subscribe((data: any) => {
+            this.PhotoFileName = data.toString();
+            this.PhotoFilePath = this.service.PhotoUrl + "/" + this.PhotoFileName;
+        });
+    }
 }

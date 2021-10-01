@@ -22,8 +22,11 @@ export class ShowEmployeeComponent implements OnInit {
 
   addClick() {
     this.employee = {
-      EmployeeId: 0,
-        EmployeeName: ""
+        EmployeeId: 0,
+        EmployeeName: "",
+        Department: "",
+        JoiningDate: "",
+        PhotoFileName: "nophoto.jpg",
     }
     this.ModalTitle = "Add Employee";
     this.ActivateAddEditEmployeeComp = true;
