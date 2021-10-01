@@ -38,9 +38,9 @@
   <tr *ngFor="let dataItem of EmployeeList">
     <td>{{dataItem.EmployeeId}}</td>
     <td>{{dataItem.EmployeeName}}</td>
-    <td>{{dataItem.DepartmentId}}</td>
+    <td>{{dataItem.DepartmentName}}</td>
     <td>{{dataItem.JoiningDate}}</td>
-    <td>{{dataItem.PhotoFilePath}}</td>
+    <td>{{dataItem.PhotoPath}}</td>
     <td>
       <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
               (click)="editClick(dataItem)" data-backdrop="static" data-keyboard="false"><i class="bi bi-pencil-square"></i> Edit </button>
