@@ -16,12 +16,23 @@ namespace WebApi.Controllers
     {
         public HttpResponseMessage Get()
         {
+            //string query = @"
+            //                select EmployeeId, EmployeeName, DepartmentId,
+            //                convert(varchar(10), JoiningDate, 120) as JoiningDate,
+            //                PhotoPath
+            //                from dbo.Employees
+            //                ";
             string query = @"
-                            select EmployeeId, EmployeeName, DepartmentId,
-                            convert(varchar(10), JoiningDate, 120) as JoiningDate,
-                            PhotoPath
-                            from dbo.Employees
-                            ";
+                            SELECT emp.EmployeeId AS EmployeeId, 
+                                       emp.EmployeeName AS EmployeeName,
+                                       convert(varchar(10), emp.JoiningDate, 120) AS JoiningDate,
+                                       emp.PhotoPath AS PhotoPath,
+                                       dep.DepartmentId AS DepartmentId,
+                                       dep.DepartmentName AS DepartmentName                                       
+                                FROM  dbo.Employees emp
+                                JOIN  dbo.Departments dep ON emp.DepartmentId = dep.DepartmentId 
+                               ";
+
             DataTable dt = new DataTable();
             using (var connection = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString))
