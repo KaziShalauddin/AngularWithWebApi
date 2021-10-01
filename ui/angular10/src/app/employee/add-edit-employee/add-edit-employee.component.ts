@@ -16,15 +16,19 @@ export class AddEditEmployeeComponent implements OnInit {
   JoiningDate: string;
   PhotoFileName: string;
   PhotoFilePath: string;
+  PhotoPath: string;
 
   DepartmentsList: any = [];
-  
+
   ngOnInit(): void {
     this.loadAllDepartmentList();
     this.EmployeeId = this.employee.EmployeeId;
     this.EmployeeName = this.employee.EmployeeName;
-    //this.DepartmentId = this.employee.DepartmentId;
-    this.DepartmentId = 1;
+    this.DepartmentId = this.employee.DepartmentId;
+    this.JoiningDate = this.employee.JoiningDate;
+    this.PhotoPath = this.employee.PhotoPath;
+    this.PhotoFileName = this.employee.PhotoPath;
+      this.PhotoFilePath = this.service.PhotoUrl + "/" + this.employee.PhotoPath;
   }
 
   addEmployee() {
@@ -32,6 +36,8 @@ export class AddEditEmployeeComponent implements OnInit {
       EmployeeId: this.EmployeeId,
       EmployeeName: this.EmployeeName,
       DepartmentId: this.DepartmentId,
+      JoiningDate: this.JoiningDate,
+      PhotoPath: this.PhotoFileName,
     }
     this.service.addEmployee(val).subscribe(res => {
       alert(res.toString());
@@ -43,24 +49,26 @@ export class AddEditEmployeeComponent implements OnInit {
       EmployeeId: this.EmployeeId,
       EmployeeName: this.EmployeeName,
       DepartmentId: this.DepartmentId,
+      JoiningDate: this.JoiningDate,
+      PhotoPath: this.PhotoFileName,
     }
     this.service.updateEmployee(val).subscribe(res => {
       alert(res.toString());
     });
   }
 
-    loadAllDepartmentList() {
-        this.service.getAllDepartments().subscribe(data => { this.DepartmentsList = data });
-    }
+  loadAllDepartmentList() {
+    this.service.getAllDepartments().subscribe(data => { this.DepartmentsList = data });
+  }
 
-    uploadPhoto(event) {
-        var file = event.target.files[0];
-        const formData: FormData = new FormData();
-        formData.append('EmployeePhoto', file, file.Name);
+  uploadPhoto(event) {
+    var file = event.target.files[0];
+    const formData: FormData = new FormData();
+    formData.append('EmployeePhoto', file, file.Name);
 
-        this.service.uploadPhoto(formData).subscribe((data: any) => {
-            this.PhotoFileName = data.toString();
-            this.PhotoFilePath = this.service.PhotoUrl + "/" + this.PhotoFileName;
-        });
-    }
+    this.service.uploadPhoto(formData).subscribe((data: any) => {
+      this.PhotoFileName = data.toString();
+      this.PhotoFilePath = this.service.PhotoUrl + "/" + this.PhotoFileName;
+    });
+  }
 }
