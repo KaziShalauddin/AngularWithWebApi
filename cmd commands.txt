@@ -1,0 +1,51 @@
+
+
+-------------------------------
+Globally install Angular
+-------------------------------
+npm install -g @angular/cli
+
+-----------------------------
+Install previous version
+-----------------------------
+npm install @angular/cli@10
+
+-----------------------------
+check version
+-----------------------------
+npm --version
+
+-----------------------------
+Create new project
+-----------------------------
+ng new angular10
+
+-----------------------------
+Change directory
+-----------------------------
+cd angular10
+
+-----------------------------
+Open directory in VS Code
+-----------------------------
+code .
+
+-----------------------------
+Run project
+-----------------------------
+ng serve --open
+
+-----------------------------
+Generate new component
+-----------------------------
+ng generate component department
+
+-----------------------------
+Generate new sub component
+-----------------------------
+ng generate component department/add-edit_department
+
+-----------------------------
+Generate new service
+-----------------------------
+ng generate service shared
